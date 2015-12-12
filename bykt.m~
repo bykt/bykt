@@ -1,7 +1,7 @@
 #! /usr/bin/octave --persist
 
 
-nc = 4;
+global nc = 10;
 
 #######################################################
 #	Entrenamiento
@@ -40,7 +40,7 @@ endfor
 # Predecimos cada muestra para cada SVM generado
 for i = 0:nc-1
     for j = i+1:nc-1
-		eval(sprintf("predict_%d_%d = svmpredict(l,t,train_%d_%d,\"\");",i,j,i,j));
+		eval(sprintf("global predict_%d_%d = svmpredict(l,t,train_%d_%d,\"-q\");",i,j,i,j));
     endfor
 endfor
 
@@ -50,17 +50,17 @@ endfor
 #######################################################
 
 function[p] = dag(m,c1,c2,depth)
-	A = 6
+	global nc;
+	eval(sprintf("global predict_%d_%d",c1,c2));
+	cond = eval(sprintf("predict_%d_%d (m) == c1",c1,c2));
 	if(depth == nc-2)
-		eval(sprintf("if(predict_%d_%d(m) == c1)",c1,c2));
-		#if(predict_c1_c2(m) == c1)
+		if(cond)
 			p = c1;
 		else
 			p = c2;
 		endif
 	else
-		A = 5
-		eval(sprintf("if(predict_%d_%d(m) == c1)",c1,c2));
+		if(cond)
 			p = dag(m,c1,--c2,++depth);
 		else
 			p = dag(m,++c1,c2,++depth);
@@ -69,9 +69,9 @@ function[p] = dag(m,c1,c2,depth)
 end
 
 for i = 1:rows(t)
-	predict(i) = dag(i,0,nc-1,0)
+	predict(i) = dag(i,0,nc-1,0);
 endfor
 
-predict = predict'
+predict = predict';
 
 

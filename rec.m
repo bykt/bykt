@@ -1,10 +1,9 @@
 #! /usr/bin/octave --persist
+global a = 1;
 
-function[] = recursivo(i)
-	i
-	++i
-	i
-	recursivo(i);
+function[b] = dag(b)
+	global a;
+	a
 end
 
-recursivo(0);
+dag(4);
