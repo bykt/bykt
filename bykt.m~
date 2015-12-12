@@ -1,7 +1,8 @@
 #! /usr/bin/octave --persist
 
 
-global nc = 10;
+global nc = 4;
+
 
 #######################################################
 #	Entrenamiento
@@ -37,12 +38,31 @@ for i = 0:nc-1
     t = [t;di]; l = [l;li];
 endfor
 
-# Predecimos cada muestra para cada SVM generado
+# Predecimos todas las muestras para cada SVM generado
 for i = 0:nc-1
     for j = i+1:nc-1
 		eval(sprintf("global predict_%d_%d = svmpredict(l,t,train_%d_%d,\"-q\");",i,j,i,j));
     endfor
 endfor
+
+
+#######################################################
+#	Votacion
+#######################################################
+
+for k = 1:rows(t)
+	ac = zeros(1,nc);
+	for i = 0:nc-1
+    	for j = i+1:nc-1
+			class = eval(sprintf("predict_%d_%d(k)",i,j));
+			++ac(class);
+		endfor
+	endfor
+	[v,winner] = max(ac);
+	predict_vot(k) = winner;
+endfor
+
+predict_vot = predict_vot';
 
 
 #######################################################
@@ -68,10 +88,10 @@ function[p] = dag(m,c1,c2,depth)
 	endif
 end
 
-for i = 1:rows(t)
-	predict(i) = dag(i,0,nc-1,0);
+for k = 1:rows(t)
+	predict_dag(k) = dag(k,0,nc-1,0);
 endfor
 
-predict = predict';
+predict_dag = predict_dag';
 
 
