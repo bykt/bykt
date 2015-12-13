@@ -62,9 +62,13 @@ for k = 1:rows(t)
 	endfor
 	[v,winner] = max(ac);
 	all_max = find(ac == v);
-	if(columns(all_max) != 1)
-		rand_max = floor(rand(1)*columns(all_max) + 1);
-		winner = all_max(rand_max);
+	if(columns(all_max) == 2)
+		winner = eval(sprintf("predict_%d_%d(k)",all_max(1)-1,all_max(2)-1));
+	else
+		if(columns(all_max) > 2)
+			rand_max = floor(rand(1)*columns(all_max) + 1);
+			winner = all_max(rand_max);
+		endif
 	endif
 	predict_vot(k) = winner-1;
 endfor

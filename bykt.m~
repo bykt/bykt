@@ -60,10 +60,12 @@ for k = 1:rows(t)
 			++ac(class+1);
 		endfor
 	endfor
-	[v,w] = max(ac);
+	[v,winner] = max(ac);
 	all_max = find(ac == v);
-	rand_max = floor(rand(1)*columns(all_max) + 1);
-	winner = all_max(rand_max);
+	if(columns(all_max) != 1)
+		rand_max = floor(rand(1)*columns(all_max) + 1);
+		winner = all_max(rand_max);
+	endif
 	predict_vot(k) = winner-1;
 endfor
 
