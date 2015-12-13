@@ -22,7 +22,7 @@ endfunction
 
 
 function multi(tr,trl,ts,tsl,C,kernel)
-
+	clear all;
 	global nc;
 
 	############################################################################################
@@ -106,19 +106,48 @@ function multi(tr,trl,ts,tsl,C,kernel)
 	endfor
 
 	predict_dag = predict_dag';
+	
 
-	comp = [l predict_vot predict_dag];
+	############################################################################################
+	#	Evaluacion
+	############################################################################################
+	
+	switch (kernel)
+  		case "0"
+    		used_k = "lineal";
+ 		case "1 -d 2"
+    		used_k = "polinomial d=2";
+		case "1 -d 3"
+    		used_k = "polinomial d=3";
+		case "2"
+    		used_k = "radial";
+  		otherwise
+    		used_k = "sin concretar";
+	endswitch
 
+	comp = l == predict_vot;
+	fallos = find(comp == 0);
+	error = rows(fallos)/rows(comp) * 100;
+	out = sprintf("Error usando votacion con C = %f y kernel %s: %f ",C,used_k,error);
+	out = [out "%"];
+	disp(out);
+	comp = l == predict_dag;
+	fallos = find(comp == 0);
+	error = rows(fallos)/rows(comp) * 100;
+	out = sprintf("Error usando DAG con C = %f y kernel %s: %f ",C,used_k,error);
+	out = [out "%"];
+	disp(out);
+	disp("----------");
+	
 endfunction
 
 allC = [0.01 0.1 1 10 100];
 global nc = 4;
 
 for p = 1:columns(allC)
-	allC(p)
-	multi("tr.dat","trlabels.dat","ts.dat","tslabels.dat",allC(p),"0");allC(p)
-	multi("tr.dat","trlabels.dat","ts.dat","tslabels.dat",allC(p),"1 -d 2");allC(p)
-	multi("tr.dat","trlabels.dat","ts.dat","tslabels.dat",allC(p),"1 -d 3");allC(p)
+	multi("tr.dat","trlabels.dat","ts.dat","tslabels.dat",allC(p),"0");
+	multi("tr.dat","trlabels.dat","ts.dat","tslabels.dat",allC(p),"1 -d 2");
+	multi("tr.dat","trlabels.dat","ts.dat","tslabels.dat",allC(p),"1 -d 3");
 	multi("tr.dat","trlabels.dat","ts.dat","tslabels.dat",allC(p),"2");
 endfor
 
