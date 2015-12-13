@@ -1,0 +1,71 @@
+Utilizando C = 0.010000
+Error usando votacion con kernel lineal: 2.836879 %
+Error usando DAG con kernel lineal: 2.836879 %
+----------
+Error usando votacion con kernel polinomial d=2: 8.814590 %
+Error usando DAG con kernel polinomial d=2: 8.814590 %
+----------
+Error usando votacion con kernel polinomial d=3: 19.351570 %
+Error usando DAG con kernel polinomial d=3: 19.452888 %
+----------
+Error usando votacion con kernel radial: 5.876393 %
+Error usando DAG con kernel radial: 5.876393 %
+----------
+************************************************************
+Utilizando C = 0.100000
+Error usando votacion con kernel lineal: 2.836879 %
+Error usando DAG con kernel lineal: 2.836879 %
+----------
+Error usando votacion con kernel polinomial d=2: 3.546099 %
+Error usando DAG con kernel polinomial d=2: 3.647416 %
+----------
+Error usando votacion con kernel polinomial d=3: 5.167173 %
+Error usando DAG con kernel polinomial d=3: 5.167173 %
+----------
+Error usando votacion con kernel radial: 3.242148 %
+Error usando DAG con kernel radial: 3.140831 %
+----------
+************************************************************
+Utilizando C = 1.000000
+Error usando votacion con kernel lineal: 3.039514 %
+Error usando DAG con kernel lineal: 3.039514 %
+----------
+Error usando votacion con kernel polinomial d=2: 2.532928 %
+Error usando DAG con kernel polinomial d=2: 2.532928 %
+----------
+Error usando votacion con kernel polinomial d=3: 2.938197 %
+Error usando DAG con kernel polinomial d=3: 2.938197 %
+----------
+Error usando votacion con kernel radial: 2.228977 %
+Error usando DAG con kernel radial: 2.228977 %
+----------
+************************************************************
+Utilizando C = 10.000000
+Error usando votacion con kernel lineal: 3.039514 %
+Error usando DAG con kernel lineal: 3.039514 %
+----------
+Error usando votacion con kernel polinomial d=2: 2.026342 %
+Error usando DAG con kernel polinomial d=2: 2.026342 %
+----------
+Error usando votacion con kernel polinomial d=3: 2.634245 %
+Error usando DAG con kernel polinomial d=3: 2.634245 %
+----------
+Error usando votacion con kernel radial: 1.823708 %
+Error usando DAG con kernel radial: 1.823708 %
+----------
+************************************************************
+Utilizando C = 100.000000
+Error usando votacion con kernel lineal: 3.039514 %
+Error usando DAG con kernel lineal: 3.039514 %
+----------
+Error usando votacion con kernel polinomial d=2: 2.026342 %
+Error usando DAG con kernel polinomial d=2: 2.026342 %
+----------
+Error usando votacion con kernel polinomial d=3: 2.634245 %
+Error usando DAG con kernel polinomial d=3: 2.634245 %
+----------
+Error usando votacion con kernel radial: 1.823708 %
+Error usando DAG con kernel radial: 1.823708 %
+----------
+************************************************************
+
